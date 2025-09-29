@@ -1,0 +1,49 @@
+# Python cache & build
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+*.egg
+build/
+dist/
+data/results/
+
+
+# Virtual environments
+.venv/
+venv/
+env/
+*.env
+
+# OS / IDE files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Large data & models
+data/
+models/
+*.pkl
+*.mp4
+*.avi
+*.mkv
+
+# Logs & results
+*.log
+*.json
+*.csv
+*.npy
+*.npz
+*.pth
+*.pt
+
+# Images
+*.png
+*.png
+*.jpeg
+*.gif
+
+# Jupyter checkpoints
+.ipynb_checkpoints/

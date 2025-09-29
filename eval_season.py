@@ -5,14 +5,14 @@ import json
 import numpy as np
 import time
 
-from modules.TraceExtractor.position_data_manager import PositionDataManager
+# from modules.TraceExtractor.position_data_manager import PositionDataManager
 
 from modules.champion_classifier import ChampionClassifier
-from modules.death_discriminator import DeathDiscriminator
-from modules.DataLabeler.data_labeler import DataLabeler
+# from modules.death_discriminator import DeathDiscriminator
+# from modules.DataLabeler.data_labeler import DataLabeler
 
 sys.path.append('./yolov5')
-from modules.vod_manager import VODManager
+# from modules.vod_manager import VODManager
 from modules.model_manager import ModelManager
 import cv2
 import matplotlib
@@ -128,8 +128,8 @@ def get_leaderboard_boxes() :
     return blue_boxes, red_boxes
 
 def eval_detect(test_args, weights=None):
-    vm = VODManager(fb_sec=7)
-    dl = DataLabeler()
+    # vm = VODManager(fb_sec=7)
+    # dl = DataLabeler()
 
     func_name = sys._getframe().f_code.co_name
     save_dir = make_directory(func_name)
@@ -138,8 +138,8 @@ def eval_detect(test_args, weights=None):
     if test_args['class_filter']:
         cc.start_validation()
         
-    if test_args['Death_discriminator']:
-        dd = DeathDiscriminator()
+    # if test_args['Death_discriminator']:
+    #     dd = DeathDiscriminator()
     cf_time = []
     dd_time = []
     detect_time = []
@@ -151,10 +151,10 @@ def eval_detect(test_args, weights=None):
     mm = mm1
     # mm2 = ModelManager('./resources/model_args.json', weights="models/epoch-97_250720_14_20_1.pt")
     # mm2.start_validation()
-    vod_dir = './data/22_spring'
+    vod_dir = './data/23_summer'
     vlist = os.listdir(vod_dir)
-    vm.set_img_mode(argfile="./resources/img_setup.json",
-                    mode='replay')
+    # vm.set_img_mode(argfile="./resources/img_setup.json",
+    #                 mode='replay')
 
 
     # import matplotlib
@@ -172,11 +172,11 @@ def eval_detect(test_args, weights=None):
     minimap_crop = (792, 1080, 1632, 1920)
     from collections import defaultdict
     
-    with open("./data/results/eval_detect/250730_2239"
-            "/jax_vods_236.json", "r", encoding="utf-8") as f:
-        jax_vods = json.load(f)
-    num_jaxvods = [idjax[0] for idjax in jax_vods]
-    j = 0
+    # with open("./data/results/eval_detect/250730_2239"
+    #         "/jax_vods_236.json", "r", encoding="utf-8") as f:
+    #     jax_vods = json.load(f)
+    # num_jaxvods = [idjax[0] for idjax in jax_vods]
+    # j = 0
     for i, vodf in enumerate(vlist):
         # if i not in num_jaxvods :
         #     continue
@@ -203,8 +203,8 @@ def eval_detect(test_args, weights=None):
         video_path = os.path.join(vod_dir, vodf)
         cap = cv2.VideoCapture(video_path)
         ch_detected = False
-        vm.set_img_mode(argfile="./resources/img_setup.json",
-                mode='replay')
+        # vm.set_img_mode(argfile="./resources/img_setup.json",
+        #         mode='replay')
         frame_ch = 0
         ch_maps, detns, dets = [], [], []
         ch_maps1, detns1, dets1 = [], [], []
@@ -936,10 +936,10 @@ def eval_detect(test_args, weights=None):
     # mm.end_validation(save_dir)
 
     # save
-    if test_args['class_filter']:
-        cc.end_validation(save_dir)
-    save_metadata(save_dir, func_name, test_args, vlist, vm, mm, cc)
-    save_time(save_dir, cf_time, dd_time, detect_time)
+    # if test_args['class_filter']:
+    #     cc.end_validation(save_dir)
+    # save_metadata(save_dir, func_name, test_args, vlist, vm, mm, cc)
+    # save_time(save_dir, cf_time, dd_time, detect_time)
 
     print('Evaluation Done')
     return

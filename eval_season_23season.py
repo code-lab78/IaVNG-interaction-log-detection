@@ -237,7 +237,7 @@ def eval_detect(test_args, weights=None):
     # ch_new_list_14 = mm1.names
     minimap_crop = (792, 1080, 1632, 1920)
     from collections import defaultdict
-    frame_val = 10
+    frame_val = 30
     
     # with open("./data/results/eval_detect/250730_2239"
     #         "/jax_vods_236.json", "r", encoding="utf-8") as f:
@@ -465,16 +465,16 @@ def eval_detect(test_args, weights=None):
                             print(f"[Warning] File not found: {src_file}")
                     # gt_champs = [mm.names[int(i)] for i in np.array(gt[2]).astype(int)]
 
-                popup_rows = [
-                    [(709-5, 749, 1609-5, 1649), (709-5, 749, 1692-5, 1732)],
-                    [(643-5, 683, 1609-5, 1649), (643-5, 683, 1692-5, 1732)],
-                    [(577-5, 617, 1609-5, 1649), (577-5, 617, 1692-5, 1732)],
-                    [(511-5, 551, 1609-5, 1649), (511-5, 551, 1692-5, 1732)],
-                ]
-                tagged_boxes = []
-                for row in popup_rows:
-                    tagged_boxes.append((*row[0], "left"))
-                    tagged_boxes.append((*row[1], "right"))
+                # popup_rows = [
+                #     [(709-5, 749, 1609-5, 1649), (709-5, 749, 1692-5, 1732)],
+                #     [(643-5, 683, 1609-5, 1649), (643-5, 683, 1692-5, 1732)],
+                #     [(577-5, 617, 1609-5, 1649), (577-5, 617, 1692-5, 1732)],
+                #     [(511-5, 551, 1609-5, 1649), (511-5, 551, 1692-5, 1732)],
+                # ]
+                # tagged_boxes = []
+                # for row in popup_rows:
+                #     tagged_boxes.append((*row[0], "left"))
+                #     tagged_boxes.append((*row[1], "right"))
 
             # # if frame_idx == 33428 : 
             # if 117600 < frame_idx < 117700 : 
@@ -494,7 +494,7 @@ def eval_detect(test_args, weights=None):
             #     else:
             #         process_frame = False
             # event_in = [ev for ev in event_intervals if frame_idx in range(ev[0], ev[1])]
-            if ch_detected and frame_idx % frame_val == 0 and max_val > 0.34 : 
+            if ch_detected and frame_idx % frame_val == 0 and max_val > 0.34 and corner < 10 : 
             # if ch_detected and process_frame and max_val > 0.37 and corner < 10 : 
                 # Popup region(s) — can be expanded if multiple icons shown
                 # print(frame_idx)
@@ -679,7 +679,9 @@ def eval_detect(test_args, weights=None):
 
                             else :
                                 # Object case
-                                if "Dragon" in victim_name :
+                                if "Dragon" in killer_name and "Baron" in victim_name :
+                                    pass
+                                elif "Dragon" in victim_name :
                                     time_since_last_kill = current_time_sec - victim_kill_timestamps[victim_name]
                                     dragon_recently_killed = current_time_sec - last_global_dragon_kill_time < dragon_cooldown_ms
 
@@ -700,8 +702,7 @@ def eval_detect(test_args, weights=None):
                                         this_pair_eligible = True
 
                                         # print("baron")
-                                elif "Dragon" in killer_name :
-                                    pass
+                                
                             
                             if key in list(tracking_kills.keys()) : # for saving frame again again
                                 tracking_log[key] = [this_pair_detected, this_pair_eligible]

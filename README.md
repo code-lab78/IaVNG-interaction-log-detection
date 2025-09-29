@@ -1,9 +1,11 @@
 # Interaction-Aware Video Narrative Generation (IaVNG)
 
 **Paper:** *Interaction-Aware Video Narrative Generation for Short-Form Gaming Content*  
-Ari Yu\*, **Sung-Yun Park\***, Sang-Kwang Lee†  
+Ari Yu\*, Sung-Yun Park\*, Sang-Kwang Lee†  
 Electronics and Telecommunications Research Institute (ETRI) & University of Science and Technology (UST)  
 (*Equal contribution, †Corresponding author*)  
+
+Presented at the **NeurIPS 2025 Workshop on Next-Generation Video Understanding (NeurIPS 2025)**  
 
 ---
 
